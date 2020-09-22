@@ -10,6 +10,12 @@ formatter.model.format = {};
 formatter.model.formatMe = function () {
     this.attributes = this.formatData(this.attributes, {}, 0);
 }
+formatter.model.unformatMe = function (attrs) {
+    this.attributes = this.formatData(this.attributes, {}, 1);
+}
+formatter.model.unformat = function (attrs) {
+    return this.formatData(attrs || _.clone(this.attributes), {}, 1);
+}
 
 formatter.model.formatData = function (data, options, loadOrSave = 0) {
     if (data && 'format' in this && typeof this.format === 'object' && _.size(this.format) > 0) {
@@ -66,7 +72,10 @@ formatter.model.formatItem = function (field, m, data, format) {
     typeof data === 'undefined' && (data = this.attributes);
     typeof format === 'undefined' && (format = this.format[field]);
 
-    var value = formatFn(_.deepValueSearch(field, data), format, m);
+    var value = _.deepValueSearch(field, data);
+    if(typeof value !== 'undefined') {
+        value = formatFn(value, format, m);
+    }
     return value;
 }
 
@@ -78,6 +87,13 @@ formatter.collection.formatModels = function () {
         return;
     for (let model of this.models) {
         model.formatMe();
+    }
+}
+formatter.collection.unformatModels = function () {
+    if (!this.models)
+        return;
+    for (let model of this.models) {
+        model.unformatMe();
     }
 }
 
