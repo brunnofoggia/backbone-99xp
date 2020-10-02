@@ -12,7 +12,7 @@ export default function (v, f, m, o={}) {
                 v && (fv = v.replace(f[!m ? 0 : 2], f[!m ? 1 : 3]));
             break;
         default:
-            if (v) {
+            if (typeof v !== 'undefined' && v !== null) {
                 v = v+'';
                 switch (f) {
                     case 'json':

@@ -2,7 +2,7 @@
   "name": "backbone-99xp",
   "description": "-",
   "author": "Bruno Foggia",
-  "version": "0.2.0-beta",
+  "version": "0.2.1-alpha",
   "type": "module",
   "browser": "src/backbone.js",
   "main": "src/backbone.js",
@@ -17,6 +17,6 @@
     "jquery-mask-plugin": "^1.14.16",
     "terser": "^4.4",
     "underscore-99xp": "^1.7.2",
-    "validate-99xp": "^1.3.1"
+    "validate-99xp": "^1.3.2"
   }
 }
