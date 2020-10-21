@@ -8,6 +8,7 @@ var obj = {};
 
 obj.jsonPile = false;
 obj.removePileLists = false;
+obj.formatOnToJSON = false;
 
 
 
@@ -169,7 +170,7 @@ obj.toJSON = function(options) {
         }
     }
 
-    json1 = typeof this.formatData === 'function' ? this.formatData(json1, options, 1) : json1;
+    json1 = this.formatOnToJSON && (typeof this.formatData === 'function') ? this.formatData(json1, options, 1) : json1;
     if (!this.jsonPile) return json1;
 
     json2 = this.createJsonStack(json1);
