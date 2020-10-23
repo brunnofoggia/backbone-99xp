@@ -36,6 +36,10 @@ export default function (v, f, m, o={}) {
                         o = _.defaults(o, defaults);
                         fv = !m ? (new Intl.NumberFormat(o.lang, o).format(v)).replace(/[^0-9\.\,]/g, '') : v.replace(/\./g, "").replace(/\,/g, ".").replace(/[^0-9\.\,]/g, '');
                         break;
+                    case 'float':
+                        o = _.defaults(o, defaults);
+                        fv = !m ? (new Intl.NumberFormat(o.lang, o).format(v)).replace(/[^0-9\.\,]/g, '') : parseFloat(v.replace(/\./g, "").replace(/\,/g, ".").replace(/[^0-9\.\,]/g, ''));
+                        break;
                     case 'integer':
                         fv = parseInt(v.replace(/\./g, "").replace(/\,/g, "").replace(/\D/g, ""), 10);
                         break;
