@@ -1,4 +1,5 @@
 import _ from 'underscore-99xp';
+import CryptoJS from 'crypto-js';
 
 export default function (v, f, m, o={}) {
     
@@ -42,6 +43,18 @@ export default function (v, f, m, o={}) {
                         break;
                     case 'integer':
                         fv = parseInt(v.replace(/\./g, "").replace(/\,/g, "").replace(/\D/g, ""), 10);
+                        break;
+                    case 'lowercase':
+                        fv = v.toLowerCase();
+                        break;
+                    case 'uppercase':
+                        fv = v.toUpperCase();
+                        break;
+                    case 'md5transfer':
+                        fv = !m ? v : CryptoJS.MD5(v).toString();
+                        break;
+                    case 'sha256transfer':
+                        fv = !m ? v : CryptoJS.SHA256(v).toString();
                         break;
                     case 'intstr':
                         fv = v.replace(/\./g, "").replace(/\,/g, "").replace(/\D/g, "");
