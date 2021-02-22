@@ -96,6 +96,7 @@ formatter.model.formatItem = function (field, m, data, format) {
     typeof data === "undefined" && (data = this.attributes);
     typeof format === "undefined" && (format = this.format[field]);
 
+    typeof format === "function" && (format = _.bind(format, this));
     var value = _.deepValueSearch(field, data);
     if (typeof value !== "undefined") {
         value = formatFn(value, format, m);
