@@ -17,15 +17,17 @@ formatter.model.unformat = function (attrs) {
 };
 
 formatter.model.formatData = function (data, options, loadOrSave = 0) {
+    var formatList = _.result(this, "format");
+
     if (
         data &&
         "format" in this &&
-        typeof this.format === "object" &&
-        _.size(this.format) > 0
+        typeof formatList === "object" &&
+        _.size(formatList) > 0
     ) {
         var field;
 
-        for (field in this.format) {
+        for (field in formatList) {
             let fieldFormatName = /\w+\[/.test(field)
                 ? field.replace(/^(\w+)\[\d+\]/, "$1[]")
                 : field;
@@ -71,9 +73,11 @@ formatter.model.formatDataItem = function (
     data,
     options
 ) {
+    var formatList = _.result(this, "format");
+
     typeof data === "undefined" && (data = this.attributes);
     !fieldFormatName && (fieldFormatName = field);
-    var format = this.format[fieldFormatName];
+    var format = formatList[fieldFormatName];
     var value = this.formatItem(field, m, data, format);
 
     if (typeof value !== "undefined") {
@@ -93,8 +97,9 @@ formatter.model.formatDataItem = function (
  * @param object data object that contains all data from a model
  */
 formatter.model.formatItem = function (field, m, data, format) {
+    var formatList = _.result(this, "format");
     typeof data === "undefined" && (data = this.attributes);
-    typeof format === "undefined" && (format = this.format[field]);
+    typeof format === "undefined" && (format = formatList[field]);
 
     typeof format === "function" && (format = _.bind(format, this));
     var value = _.deepValueSearch(field, data);
