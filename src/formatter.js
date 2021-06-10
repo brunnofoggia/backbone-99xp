@@ -134,7 +134,7 @@ formatter.model.parse = function (response, options) {
 formatter.model.toJSON = function (options) {
     var json = _.clone(this.attributes);
     typeof this.formatData === "function" &&
-        (json = this.formatData(json1, options, 1));
+        (json = this.formatData(json, options, 1));
     return json;
 };
 
