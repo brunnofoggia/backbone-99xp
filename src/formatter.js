@@ -132,10 +132,14 @@ formatter.model.parse = function (response, options) {
 };
 
 formatter.model.toJSON = function (options) {
-    var json = _.clone(this.attributes);
+    var json = this.getJSONtoFormat(options);
     typeof this.formatData === "function" &&
         (json = this.formatData(json, options, 1));
     return json;
+};
+
+formatter.model.getJSONtoFormat = function (options) {
+    return _.clone(this.attributes);
 };
 
 export default formatter;
