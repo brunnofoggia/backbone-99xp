@@ -2,6 +2,10 @@ import { base64encode, base64decode } from "nodejs-base64";
 
 var helpers = { model_prototype: {} };
 
+helpers.model_prototype.getId = function () {
+    return this.get(this.idAttribute);
+};
+
 helpers.model_prototype.titleAttribute = "title";
 helpers.model_prototype.titleJoinText = " - ";
 helpers.model_prototype.getTitle = function () {
