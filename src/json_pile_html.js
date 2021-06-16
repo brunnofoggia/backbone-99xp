@@ -6,6 +6,27 @@ import Bb from "backbone";
 
 var obj = {};
 
+obj.constructor = function (attributes, options) {
+    var attrs = attributes || {};
+    options || (options = {});
+    this.preinitialize.apply(this, arguments);
+    this.cid = _.uniqueId(this.cidPrefix);
+    this.attributes = {};
+    if (options.collection) this.collection = options.collection;
+    if (options.parse) attrs = this.parse(attrs, options) || {};
+    this.setDefaults(attrs);
+    this.changed = {};
+    this.initialize.apply(this, arguments);
+};
+
+obj.setDefaults = function (attrs) {
+    var defaults = _.result(this, "defaults");
+    attrs = _.defaults2(_.extend({}, attrs), defaults);
+    for (var x in attrs) {
+        this.set(x, attrs[x]);
+    }
+};
+
 obj.jsonPile = false;
 obj.removePileLists = false;
 obj.formatOnToJSON = false;
