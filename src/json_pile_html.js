@@ -20,7 +20,7 @@ obj.constructor = function (attributes, options) {
 };
 
 obj.setDefaults = function (attrs) {
-    var defaults = _.result(this, "defaults");
+    var defaults = _.result(this, "defaults") || {};
     attrs = _.defaults2(_.extend({}, attrs), defaults);
     for (var x in attrs) {
         this.set(x, attrs[x]);
