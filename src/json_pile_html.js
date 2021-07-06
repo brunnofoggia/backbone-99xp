@@ -62,7 +62,7 @@ obj.set = function (key, val, options) {
     var _previousAttributes = _.clone(this.attributes);
     var json = this.createJsonStack(attrs);
 
-    var v = this.validate(json, options);
+    var v = options.validate === false ? null : this.validate(json, options);
     if (v !== null) {
         this.validationError = v;
         return false;
